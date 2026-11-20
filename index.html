@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>FINE ATLAS 🚇 御堂筋線（江坂〜梅田）チラシ訪問＆関係構築ナビ｜富田専用コンパス</title>
+  <meta name="description" content="株式会社ファインアトラス（ファインスタッフ×対馬水産）新人の富田君専用。御堂筋線（江坂〜梅田・北新地）の電車で回れる実在飲食店リスト、売り込みゼロの1分チラシご挨拶トーク、人間関係構築から定期便契約までの実践ナビ。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Shippori+Mincho:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-kicker">
+          <span class="midosuji-symbol">M11 → M16</span>
+          <span>FINE ATLAS Co., Ltd. — 新人・富田君専用 フィールド＆架電コンパス</span>
+        </div>
+        <h1>御堂筋線（江坂〜梅田）「チラシご挨拶から定期便契約まで」実践ナビ</h1>
+        <p class="hero-lead">
+          <strong>産地で時間を止め、現地で時間を動かす。</strong><br />
+          いきなり電話で売り込まなくて大丈夫！まずは<strong>「1分だけチラシをお渡しに伺ってもいいですか？」</strong>の小さなご挨拶アポを取り、御堂筋線（江坂〜梅田・11分圏）で顔を覚えてもらい、<strong>お試しセット（税込1万円）→ チルド定期便のご契約</strong>へ少しずつ信頼関係を育てましょう。
+        </p>
+        <div class="hero-actions">
+          <a id="btn-download-excel" href="御堂筋線_江坂〜梅田_チラシ架電＆訪問リスト_ファインアトラス富田専用.xlsx" download class="btn btn-primary">
+            📥 4シート統合Excelリスト (.xlsx)
+          </a>
+          <a id="btn-open-manual" href="docs/富田専用_御堂筋線チラシ訪問から定期便契約までの営業マニュアル.md" target="_blank" rel="noopener noreferrer" class="btn btn-ghost-hero">
+            📄 営業ステップ手引書 (.md)
+          </a>
+          <button id="btn-share-mobile-route" type="button" class="btn btn-ghost-hero">
+            📱 スマホ用ルートURLをコピー
+          </button>
+          <button id="btn-export-csv" type="button" class="btn btn-ghost-hero">
+            💾 架電・訪問記録をCSV保存
+          </button>
+          <button id="btn-theme-toggle" type="button" class="btn btn-ghost-hero">
+            🌙 ダーク表示切替
+          </button>
+        </div>
+      </div>
+
+      <figure class="hero-visual-card">
+        <img src="assets/hero-kitchen.jpg" alt="下処理・仕込みを終えて厨房に届く甘鯛・剣先イカ・穴子・のどぐろのチルド切り身イメージ" />
+        <figcaption class="hero-visual-caption">
+          <span>🐟 甘鯛・剣先イカ・生穴子・煮穴子・のどぐろ等</span>
+          <span>🚇 江坂(M11)〜梅田(M16) 電車11分圏</span>
+        </figcaption>
+      </figure>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <!-- Primary Navigation Bar -->
+    <div class="primary-nav-bar" role="navigation" aria-label="メインメニュー">
+      <div class="primary-tabs" role="tablist" aria-label="機能切替タブ">
+        <button id="tab-btn-list" type="button" role="tab" aria-selected="true" aria-controls="panel-list" class="nav-tab">
+          📋 架電＆チラシ訪問リスト <span id="badge-total-stores" class="nav-count-badge">--</span>
+        </button>
+        <button id="tab-btn-route" type="button" role="tab" aria-selected="false" aria-controls="panel-route" class="nav-tab">
+          🚃 今日の電車訪問ルート帳 <span id="badge-route-count" class="nav-count-badge">0</span>
+        </button>
+        <button id="tab-btn-scripts" type="button" role="tab" aria-selected="false" aria-controls="panel-scripts" class="nav-tab">
+          💬 4段階トーク＆切り返し台本
+        </button>
+        <button id="tab-btn-company" type="button" role="tab" aria-selected="false" aria-controls="panel-company" class="nav-tab">
+          🐟 ファインアトラス虎の巻
+        </button>
+        <button id="tab-btn-flyer" type="button" role="tab" aria-selected="false" aria-controls="panel-flyer" class="nav-tab">
+          🖨️ ご挨拶チラシ印刷 (A4)
+        </button>
+      </div>
+
+      <div class="clock-status-group">
+        <span id="live-jst-clock" class="jst-clock-badge">JST --:-- 確認中</span>
+      </div>
+    </div>
+
+    <!-- Summary KPI Strip -->
+    <section class="kpi-strip" aria-label="営業・関係構築サマリー">
+      <div class="kpi-card">
+        <div class="kpi-label">御堂筋線 厳選収録店舗</div>
+        <div id="kpi-total-stores" class="kpi-value">-- 店舗</div>
+        <div id="kpi-rank-split" class="kpi-sub">Sランク -- / Aランク --</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">🟢 今すぐ架電しやすい店</div>
+        <div id="kpi-golden-now" class="kpi-value">-- 店舗</div>
+        <div id="kpi-today-weekday" class="kpi-sub">現在時刻が推奨枠＆営業日</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">📄 チラシ訪問OK・投函OK</div>
+        <div id="kpi-flyer-ok" class="kpi-value">0 店舗</div>
+        <div class="kpi-sub">Step 1 クリア（ご挨拶許可）</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">🤝 訪問済・関係構築中</div>
+        <div id="kpi-visited-count" class="kpi-value">0 店舗</div>
+        <div class="kpi-sub">Step 2〜3（顔なじみ育成中）</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">🎁 お試し案内・定期便商談</div>
+        <div id="kpi-trial-contract" class="kpi-value">0 店舗</div>
+        <div class="kpi-sub">Step 3〜4（契約フェーズ）</div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         PANEL 1: 📋 御堂筋線 架電＆チラシ訪問リスト
+         ===================================================================== -->
+    <section id="panel-list" role="tabpanel" aria-labelledby="tab-btn-list">
+      <!-- Interactive Midosuji Line Subway Map -->
+      <div class="midosuji-line-panel">
+        <div class="midosuji-line-header">
+          <h2 class="midosuji-line-title">
+            <span class="midosuji-symbol">M</span>
+            <span>御堂筋線 駅別クイック選択（クリックでその駅の徒歩圏店舗に絞り込み）</span>
+          </h2>
+          <span style="font-size:0.78rem; color:var(--ink-muted);">江坂駅から梅田駅まで乗車わずか11分・全店舗が駅徒歩10分以内</span>
+        </div>
+
+        <div class="subway-track-scroll">
+          <div id="subway-station-track" class="subway-track" role="group" aria-label="御堂筋線駅選択">
+            <!-- Populated by app.js -->
+          </div>
+        </div>
+
+        <div id="station-guide-banner" class="station-guide-banner">
+          <!-- Populated by app.js -->
+        </div>
+      </div>
+
+      <!-- Filter Box -->
+      <div class="filter-box">
+        <div id="fish-filter-bar" class="fish-bar" role="group" aria-label="魚種フックで絞り込み">
+          <!-- Populated by app.js -->
+        </div>
+
+        <div class="filter-grid-row">
+          <input
+            id="input-search"
+            type="search"
+            class="input-field"
+            placeholder="🔍 店名・駅・電話番号・魚メニュー・メモ（例：穴子、甘鯛、ワンオペ、中津…）で検索"
+            aria-label="店舗検索"
+          />
+          <select id="select-segment" class="select-field" aria-label="業態グループ絞り込み">
+            <option value="ALL">🍴 業態：すべて表示</option>
+            <option value="SEG1">① 洋食ポワソン（ビストロ・伊・仏）</option>
+            <option value="SEG2">② 少人数割烹・和食・天ぷら・蕎麦</option>
+            <option value="SEG3">③ 個人鮨・寿司割烹</option>
+          </select>
+          <select id="select-status" class="select-field" aria-label="営業ステップ絞り込み">
+            <option value="ALL">📊 進捗ステータス：すべて</option>
+            <option value="未架電">未架電</option>
+            <option value="不在・再架電">📞 不在・再架電</option>
+            <option value="ポスト投函OK">📮 ポスト投函OK</option>
+            <option value="チラシ手渡しアポ獲得">📄 チラシ手渡しアポ獲得！</option>
+            <option value="1回目チラシ訪問済">👟 1回目チラシ訪問済</option>
+            <option value="2〜3回目関係構築中">🤝 2〜3回目関係構築中</option>
+            <option value="お試しセット案内済">🎁 お試しセット案内済</option>
+            <option value="定期便商談・契約">🎉 定期便商談・契約</option>
+            <option value="見送り・対象外">⏸️ 見送り・対象外</option>
+          </select>
+          <select id="select-sort" class="select-field" aria-label="並び替え">
+            <option value="priority">並び順：おすすめ優先順（S→A・江坂発）</option>
+            <option value="esaka_near">並び順：江坂駅から近い順（M11→M16）</option>
+            <option value="umeda_near">並び順：梅田側から戻る順（M16→M11）</option>
+            <option value="walk_short">並び順：駅からの徒歩が近い順</option>
+          </select>
+        </div>
+
+        <div class="quick-filter-row">
+          <div class="quick-pills" id="quick-filter-pills">
+            <button type="button" class="pill-toggle" data-qtag="GOLDEN_NOW">🟢 今が架電時間内（定休除く）</button>
+            <button type="button" class="pill-toggle" data-qtag="STARRED_ROUTE">⭐ 今日の訪問ルート登録店</button>
+            <button type="button" class="pill-toggle" data-qtag="UNCALLED_ONLY">📞 未架電のみ</button>
+            <button type="button" class="pill-toggle" data-qtag="DIRECT_06">☎️ 06直通番号のみ</button>
+            <button type="button" id="btn-reset-filters" class="btn btn-outline btn-sm">条件リセット</button>
+          </div>
+          <div id="label-result-count" class="result-count-text">表示中: -- 件</div>
+        </div>
+      </div>
+
+      <!-- Store Cards Grid -->
+      <div id="stores-card-grid" class="stores-grid">
+        <!-- Populated dynamically by app.js -->
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         PANEL 2: 🚃 今日の電車訪問ルート帳
+         ===================================================================== -->
+    <section id="panel-route" role="tabpanel" aria-labelledby="tab-btn-route" hidden>
+      <div class="section-card">
+        <div class="section-header-flex">
+          <div>
+            <h2 class="section-title">🚃 富田君の「今日の御堂筋線・チラシ訪問ルート帳」</h2>
+            <p style="margin:0; font-size:0.86rem; color:var(--ink-secondary);">
+              店舗カードで <strong>「⭐ 訪問ルートに追加」</strong> を押したお店、またはステータスが <strong>「📄 チラシ手渡しアポ獲得！」「📮 ポスト投函OK」</strong> のお店を、御堂筋線の駅順（M11 江坂 → M16 梅田）に自動整列します。
+            </p>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:8px;" class="no-print">
+            <button id="btn-route-direction" type="button" class="btn btn-outline btn-sm">
+              🔄 並び順：江坂 → 梅田（南行き）
+            </button>
+            <button id="btn-route-starter" type="button" class="btn btn-jade btn-sm">
+              ⚡ 初日おすすめ練習ルート（江坂・東三国Sランク5店）を自動セット
+            </button>
+            <button id="btn-print-route" type="button" class="btn btn-navy btn-sm">
+              🖨️ ルート表を印刷
+            </button>
+          </div>
+        </div>
+
+        <div id="route-summary-banner" class="station-guide-banner" style="margin-bottom:16px;">
+          <!-- Populated by app.js -->
+        </div>
+
+        <div id="route-stations-container">
+          <!-- Populated by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         PANEL 3: 💬 4段階トーク＆切り返し台本
+         ===================================================================== -->
+    <section id="panel-scripts" role="tabpanel" aria-labelledby="tab-btn-scripts" hidden>
+      <div class="section-card">
+        <h2 class="section-title">🌱 売り込まずに信頼を築く「4ステップ営業ロードマップ」</h2>
+        <p style="margin:0 0 16px; font-size:0.88rem; color:var(--ink-secondary);">
+          ファインアトラスの定期便は、1回の電話で無理に売る商品ではありません。<strong>「①電話でチラシ許可 → ②90秒の爽やかな手渡し → ③2〜3回目の顔出しでお試しセット（1万円） → ④5項目ヒアリングで定期便契約」</strong>の順番を守れば、新人の富田君でも着実にファンを増やせます。
+        </p>
+        <div id="funnel-steps-container" class="funnel-grid">
+          <!-- Populated by app.js -->
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h2 class="section-title">🛡️ 断られても好印象で着地する「優しい切り返し7選」</h2>
+        <p style="margin:0 0 16px; font-size:0.88rem; color:var(--ink-secondary);">
+          論破や食い下がりは絶対NG！相手の忙しさに共感し、<strong>「ポスト投函だけならOK」「また手が空く時間を教えてもらう」</strong>へ柔らかく着地させましょう。
+        </p>
+        <div id="objection-cards-container" class="objection-grid">
+          <!-- Populated by app.js -->
+        </div>
+      </div>
+
+      <!-- Interactive Step 4 Hearing Sheet Generator -->
+      <div class="section-card">
+        <div class="section-header-flex">
+          <div>
+            <h2 class="section-title">📝 STEP 4：定期便お見積りパス用「5項目ヒアリングメモ作成メーカー」</h2>
+            <p style="margin:0; font-size:0.85rem; color:var(--ink-secondary);">
+              価格・最低ロット・配送曜日・送料は自己判断で即答せず、この5つを聞いてコピーし、今田代表・尾崎さん・平林さんへ共有すれば100点満点です！
+            </p>
+          </div>
+          <button id="btn-copy-hearing-report" type="button" class="btn btn-primary">
+            📋 社内共有フォーマットでコピー
+          </button>
+        </div>
+
+        <div class="hearing-form-grid">
+          <label>
+            <span style="font-size:0.8rem; font-weight:700;">対象店舗名・ご担当者名</span>
+            <input id="hear-store" type="text" class="input-field" placeholder="例：和趣 橘（橘大将）" />
+          </label>
+          <label>
+            <span style="font-size:0.8rem; font-weight:700;">① 料理の用途（どんな一皿に使うか）</span>
+            <input id="hear-usage" type="text" class="input-field" placeholder="例：会席コースの焼物（松笠焼き）、〆の炙り握り" />
+          </label>
+          <label>
+            <span style="font-size:0.8rem; font-weight:700;">② 希望する魚種・サイズ感・1回あたりの量</span>
+            <input id="hear-species" type="text" class="input-field" placeholder="例：甘鯛フィレ70g前後×10切、生穴子開き×5尾" />
+          </label>
+          <label>
+            <span style="font-size:0.8rem; font-weight:700;">③ どこまでの下処理を任せたいか（こだわり確認）</span>
+            <input id="hear-prep" type="text" class="input-field" placeholder="例：タレは自店で炊くため味付け無しの『生開き・骨処理』希望" />
+          </label>
+          <label>
+            <span style="font-size:0.8rem; font-weight:700;">④ 希望納品状態（チルド／冷凍）・希望曜日・時間帯</span>
+            <input id="hear-delivery" type="text" class="input-field" placeholder="例：チルドで木曜14〜16時希望（水曜定休）" />
+          </label>
+          <label>
+            <span style="font-size:0.8rem; font-weight:700;">⑤ お試しセット反応・現状のお悩みメモ</span>
+            <input id="hear-notes" type="text" class="input-field" placeholder="例：二番手が退職し仕込み時間が2時間足りていない。まずはお試しセット案内済" />
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         PANEL 4: 🐟 ファインアトラス虎の巻（事業理解＆厳守ルール）
+         ===================================================================== -->
+    <section id="panel-company" role="tabpanel" aria-labelledby="tab-btn-company" hidden>
+      <div class="section-card">
+        <h2 class="section-title">🐟 最初に深く理解する「株式会社ファインアトラス」の本質</h2>
+        <p style="margin:0 0 14px; font-size:0.92rem;">
+          公式スローガン：<strong>「産地で時間を止め、現地で時間を動かす。」「魚の仕入れをもっとシンプルに。」</strong><br />
+          ホテル・飲食業界の人材不足に向き合ってきた<strong>「ファインスタッフ」</strong>と、水産物の加工・鮮度保持・販路拡大に取り組んできた<strong>「対馬水産」</strong>の2社の経験から生まれた新しい会社です。
+        </p>
+
+        <div id="company-pillars-grid" class="pillars-3col">
+          <!-- Populated by app.js -->
+        </div>
+
+        <h3 style="font-size:1rem; margin:20px 0 10px;">📌 会社概要・公式確認済みファクト</h3>
+        <table class="info-table">
+          <tbody id="company-overview-tbody">
+            <!-- Populated by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-card">
+        <h2 class="section-title">⚠️ 富田君が必ず守る「5つの誠実ガードレール（業務事故ゼロの鉄則）」</h2>
+        <p style="margin:0 0 12px; font-size:0.86rem; color:var(--ink-secondary);">
+          立ち上げ期の会社だからこそ、できないことや未確定の条件を推測で約束しない「誠実さ」が一番の武器になります。
+        </p>
+        <ul id="company-guardrails-list" class="guardrail-list">
+          <!-- Populated by app.js -->
+        </ul>
+
+        <div style="margin-top:18px; display:flex; flex-wrap:wrap; gap:10px;">
+          <a href="https://fineatlas.co.jp/" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">🌐 公式サイト トップ</a>
+          <a href="https://fineatlas.co.jp/recruit" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">🌐 採用・営業内容ページ</a>
+          <a href="https://fineatlas.co.jp/company" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">🌐 会社概要</a>
+          <a href="https://zmqxpe-6h.myshopify.com/products/trialset" target="_blank" rel="noopener noreferrer" class="btn btn-jade btn-sm">🛒 お試しセット商品ページ（¥10,000税込）</a>
+          <a href="https://fineatlas.co.jp/blog/" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">📰 公式ブログ</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         PANEL 5: 🖨️ ご挨拶チラシ＆名刺添え状 印刷シート (A4)
+         ===================================================================== -->
+    <section id="panel-flyer" role="tabpanel" aria-labelledby="tab-btn-flyer" hidden>
+      <div class="section-card no-print" style="margin-bottom:16px;">
+        <div class="section-header-flex" style="margin-bottom:10px;">
+          <div>
+            <h2 class="section-title">🖨️ そのまま持って回れる「A4ご挨拶チラシ・添え状」印刷プレビュー</h2>
+            <p style="margin:0; font-size:0.85rem; color:var(--ink-secondary);">
+              公式パンフレットと一緒に添える「ご近所ご挨拶シート」としても、単独のA4ご挨拶チラシとしても使えます。下の入力欄を書き換えると印刷面に即反映されます。
+            </p>
+          </div>
+          <button id="btn-print-flyer" type="button" class="btn btn-primary">
+            🖨️ A4で印刷 ／ PDF保存
+          </button>
+        </div>
+        <div class="hearing-form-grid" style="margin-bottom:0;">
+          <label>
+            <span style="font-size:0.78rem; font-weight:700;">担当者名・肩書</span>
+            <input id="flyer-rep-name" type="text" class="input-field" value="営業担当：富田（とみた）" />
+          </label>
+          <label>
+            <span style="font-size:0.78rem; font-weight:700;">折り返し連絡先（会社または担当直通TEL・メール）</span>
+            <input id="flyer-rep-contact" type="text" class="input-field" value="Web検索：「ファインアトラス」 https://fineatlas.co.jp/" />
+          </label>
+        </div>
+      </div>
+
+      <article class="a4-flyer-sheet" aria-label="印刷用A4ご挨拶チラシ">
+        <div class="flyer-top-band">
+          <div>
+            <div style="font-size:0.78rem; font-weight:700; color:#475569; letter-spacing:0.06em;">
+              料理長様・オーナー様へ ご近所ご挨拶のご案内
+            </div>
+            <div style="font-size:1.25rem; font-weight:700; color:#0d2238;">
+              株式会社ファインアトラス <span style="font-size:0.82rem; font-weight:500;">FINE ATLAS Co., Ltd.</span>
+            </div>
+          </div>
+          <div style="text-align:right; font-size:0.78rem; color:#334155;">
+            ファインスタッフ × 対馬水産 グループ<br />
+            本社：大阪府豊中市新千里西町1-1-4
+          </div>
+        </div>
+
+        <p style="margin:0 0 4px; font-size:0.86rem; font-weight:700; color:#e21822;">
+          産地で時間を止め、現地で時間を動かす。
+        </p>
+        <h2 class="flyer-headline">
+          お魚の「仕入れ」と「下処理・仕込み」を、<br />もっとシンプルにしませんか。
+        </h2>
+        <p style="font-size:0.88rem; color:#1e293b; margin:0 0 12px;">
+          季節や水揚げで価格・サイズ・入荷が変わり、ウロコ引き・内臓処理・開きなどの仕込みに毎日お時間を取られていませんか？<br />
+          ファインアトラスは、飲食業界の人材不足に向き合ってきた<strong>「ファインスタッフ」</strong>と、水産加工・鮮度保持に挑んできた<strong>「対馬水産」</strong>の経験を活かし、料理人様が<strong>「調理と仕上げ」に専念できる環境づくり</strong>をお手伝いします。
+        </p>
+
+        <div class="flyer-3steps">
+          <div class="flyer-step-box">
+            <strong style="color:#0d2238; display:block; margin-bottom:4px;">01｜産地で時間を止める</strong>
+            旬や大漁の時期に全国の産地で買い付け、提携加工場で素早く下処理・真空包装・急速冷凍。高品質を保ち価格変動も抑えます。
+          </div>
+          <div class="flyer-step-box">
+            <strong style="color:#0d2238; display:block; margin-bottom:4px;">02｜現地で時間を動かす</strong>
+            お届け先地域の拠点で、ご注文に合わせて必要な分だけ解凍・仕込みを行い、使いやすいチルド状態（商品により冷凍も可）でお届けします。
+          </div>
+          <div class="flyer-step-box">
+            <strong style="color:#0d2238; display:block; margin-bottom:4px;">03｜仕込みの手間を軽減</strong>
+            甘鯛・剣先イカ・穴子・のどぐろ等、お店ごとの用途（「生開きだけ任せて味付けは自店で」など）に合わせたご提案が可能です。
+          </div>
+        </div>
+
+        <div class="flyer-greeting-card">
+          <strong>🌱 ご導入までの安心ステップ（無理な売り込みは一切いたしません）</strong><br />
+          ① まずは公式Webサイトの<strong>「お試しセット（税込10,000円・クレジットカード決済）」</strong>を実際の厨房でお使いいただき、鮮度・サイズ・歩留まり・扱いやすさをお確かめください（※大阪市全域・豊中市・吹田市・箕面市対応／最新のセット内容はWeb商品ページにてご確認ください）。<br />
+          ② ご納得いただけましたら、ご希望の魚種・加工度・数量・配送条件を個別にお打ち合わせの上、<strong>定期便</strong>をご検討いただけます。
+        </div>
+
+        <div style="border:1px dashed #94a3b8; border-radius:6px; padding:12px 14px; margin-bottom:14px; font-size:0.84rem;">
+          <strong>💬 ご挨拶メモ（手書き一言欄）：</strong>
+          <div style="height:44px;"></div>
+        </div>
+
+        <div class="flyer-footer-box">
+          <div>
+            <strong>株式会社ファインアトラス（FINE ATLAS Co., Ltd.）</strong><br />
+            〒560-0083 大阪府豊中市新千里西町1丁目1番4号 千里中央ツインビル 別館2階<br />
+            公式サイト：https://fineatlas.co.jp/ ｜ お試しセット案内：https://zmqxpe-6h.myshopify.com/products/trialset
+          </div>
+          <div style="text-align:right; font-weight:700; color:#0d2238;">
+            <div id="flyer-preview-rep">営業担当：富田（とみた）</div>
+            <div id="flyer-preview-contact" style="font-size:0.78rem; font-weight:500; color:#334155;">Web検索：「ファインアトラス」 https://fineatlas.co.jp/</div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- Full-Screen Teleprompter Modal (電話中・大文字カンペ画面) -->
+  <div id="teleprompter-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="teleprompter-title" hidden>
+    <div class="teleprompter-dialog">
+      <div class="section-header-flex" style="margin-bottom:10px;">
+        <div>
+          <span id="tp-station-badge" class="badge-station">M11 江坂</span>
+          <h2 id="teleprompter-title" class="section-title" style="margin-top:6px;">店舗名</h2>
+          <div id="tp-meta" style="font-size:0.85rem; color:var(--ink-secondary);"></div>
+        </div>
+        <div style="display:flex; gap:8px; align-items:center;">
+          <a id="tp-call-btn" href="tel:" class="tel-call-link">📞 発信</a>
+          <button id="btn-close-teleprompter" type="button" class="btn btn-outline btn-sm">✕ 閉じる (Esc)</button>
+        </div>
+      </div>
+
+      <div class="card-script-tabs" style="border-radius:var(--radius-sm); border:1px solid var(--border-light);">
+        <button type="button" class="card-script-tab tp-step-btn is-active" data-tp-step="call">① 電話：1分チラシご挨拶アポ</button>
+        <button type="button" class="card-script-tab tp-step-btn" data-tp-step="visit1">② 初回訪問：90秒チラシ手渡し</button>
+        <button type="button" class="card-script-tab tp-step-btn" data-tp-step="visit2">③ 再訪：関係構築→お試し案内</button>
+      </div>
+
+      <div id="tp-script-content" class="teleprompter-script-large"></div>
+
+      <div style="margin-bottom:14px;">
+        <strong style="font-size:0.84rem;">💡 とっさの優しい切り返し（クリックで下に表示）：</strong>
+        <div id="tp-quick-objections" style="display:flex; flex-wrap:wrap; gap:6px; margin-top:6px;"></div>
+        <div id="tp-objection-answer" class="evidence-panel" style="margin-top:8px;" hidden></div>
+      </div>
+
+      <div class="crm-controls-row">
+        <select id="tp-status-select" class="select-field" aria-label="電話結果ステータス更新">
+          <option value="未架電">未架電</option>
+          <option value="不在・再架電">📞 不在・再架電</option>
+          <option value="ポスト投函OK">📮 ポスト投函OK</option>
+          <option value="チラシ手渡しアポ獲得">📄 チラシ手渡しアポ獲得！</option>
+          <option value="1回目チラシ訪問済">👟 1回目チラシ訪問済</option>
+          <option value="2〜3回目関係構築中">🤝 2〜3回目関係構築中</option>
+          <option value="お試しセット案内済">🎁 お試しセット案内済</option>
+          <option value="定期便商談・契約">🎉 定期便商談・契約</option>
+          <option value="見送り・対象外">⏸️ 見送り・対象外</option>
+        </select>
+        <input id="tp-memo-input" type="text" class="input-field" placeholder="大将のお名前・訪問OK時間帯・反応をその場でメモ…" />
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-notice" class="toast-notice" role="status" aria-live="polite"></div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
