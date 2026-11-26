@@ -1183,7 +1183,8 @@
       route: ["tab-btn-route", "panel-route"],
       scripts: ["tab-btn-scripts", "panel-scripts"],
       company: ["tab-btn-company", "panel-company"],
-      flyer: ["tab-btn-flyer", "panel-flyer"]
+      flyer: ["tab-btn-flyer", "panel-flyer"],
+      visits: ["tab-btn-visits", "panel-visits"]
     };
     Object.keys(map).forEach((k) => {
       const [btnId, panelId] = map[k];
@@ -1237,6 +1238,7 @@
     document.getElementById("tab-btn-scripts").addEventListener("click", () => switchMainTab("scripts"));
     document.getElementById("tab-btn-company").addEventListener("click", () => switchMainTab("company"));
     document.getElementById("tab-btn-flyer").addEventListener("click", () => switchMainTab("flyer"));
+    document.getElementById("tab-btn-visits").addEventListener("click", () => switchMainTab("visits"));
 
     // Filter Inputs
     document.getElementById("input-search").addEventListener("input", (e) => {

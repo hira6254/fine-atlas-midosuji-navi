@@ -72,6 +72,9 @@
         <button id="tab-btn-flyer" type="button" role="tab" aria-selected="false" aria-controls="panel-flyer" class="nav-tab">
           🖨️ ご挨拶チラシ印刷 (A4)
         </button>
+        <button id="tab-btn-visits" type="button" role="tab" aria-selected="false" aria-controls="panel-visits" class="nav-tab" style="background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff;border-color:#38bdf8;">
+          👑 訪問商談・結果管理（社長ボード）
+        </button>
       </div>
 
       <div class="clock-status-group">
@@ -429,6 +432,13 @@
         </div>
       </article>
     </section>
+
+    <!-- =====================================================================
+         PANEL 6: 👑 訪問商談・結果管理（社長ボード・サイボウズ日報自動転記）
+         ===================================================================== -->
+    <section id="panel-visits" role="tabpanel" aria-labelledby="tab-btn-visits" hidden>
+      <div class="js-fine-visit-board-container"></div>
+    </section>
   </main>
 
   <!-- Full-Screen Teleprompter Modal (電話中・大文字カンペ画面) -->
@@ -480,6 +490,8 @@
   <div id="toast-notice" class="toast-notice" role="status" aria-live="polite"></div>
 
   <script src="data.js"></script>
+  <script src="visit_reports_data.js"></script>
+  <script src="visit_reports_widget.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
